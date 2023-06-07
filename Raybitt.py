@@ -8,12 +8,19 @@ import Config
 import discord
 from discord.ext import commands
 import sqlite3
+import nltk
+from nltk.corpus import stopwords
+
 
 intents = discord.Intents.default()
 intents.typing = False
 intents.presences = False
 intents.messages = True
 intents.message_content = True
+
+nltk.download('stopwords')
+stop_words = stopwords.words('english')
+dumbasswords = stop_words[:10000]
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
@@ -37,7 +44,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     words = message.content.split()
-    if words[0][0] != "!":
+    if words[0][0] != "!" and words[0] not in dumbasswords:
         for word in words:
             try:
                  word += 1
@@ -65,7 +72,6 @@ async def top5(ctx):
     rows = cursor.fetchall()
 
     for row in rows:
-        print(f'The word: "{row[0]}" has been said: {row[1]} times')
         await ctx.send(f'The word: "{row[0]}" has been said: {row[1]} times')
 
 
