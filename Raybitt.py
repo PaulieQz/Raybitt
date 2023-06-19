@@ -3,11 +3,11 @@
 # the autistic dude from Rain Man
 # since the bot counts words
 # and that's why I'm the name guy - Spacecow
-import discord
+import nextcord as discord
 import sqlite3
 import configparser
 import os
-from discord.ext import commands
+from nextcord.ext import commands
 import tracemalloc
 import random
 tracemalloc.start()
@@ -17,6 +17,7 @@ intents.typing = False
 intents.presences = False
 intents.messages = True
 intents.message_content = True
+intents.guilds = True
 
 bot = commands.Bot(command_prefix='/', intents=intents)
 
@@ -27,10 +28,9 @@ database_file = config['Database']['File']
 token = config['Bot']['Token']
 
 
-@bot.command()
-async def loadCog(extension):
+def loadCog(extension):
     try:
-        await bot.load_extension(extension)
+        bot.load_extension(extension)
         print(f"Cog {extension} loaded.")
     except commands.ExtensionNotFound:
         print(f"Cog '{extension}' not found.")
@@ -54,8 +54,7 @@ async def on_ready():
 
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
-            # bot.load_extension(f"cogs.{filename[:-3]}")
-            await loadCog(f"cogs.{filename[:-3]}")
+            loadCog(f"cogs.{filename[:-3]}")
     print(f'Logged in as {bot.user.name} ({bot.user.id})')
     print('------')
 

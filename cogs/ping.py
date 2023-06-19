@@ -1,4 +1,4 @@
-from discord.ext import commands
+from nextcord.ext import commands
 
 
 class Ping(commands.Cog):
@@ -14,6 +14,6 @@ class Ping(commands.Cog):
         await ctx.send(f"Pong! Latency: {latency_ms}ms")
 
 
-async def setup(bot):
-    await bot.add_cog(Ping(bot))
+def setup(bot):
+    bot.add_cog(Ping(bot))
     

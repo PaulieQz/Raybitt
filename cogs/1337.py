@@ -1,4 +1,4 @@
-from discord.ext import commands
+from nextcord.ext import commands
 
 
 class Leet(commands.Cog):
@@ -41,5 +41,5 @@ class Leet(commands.Cog):
         await ctx.send(leet_text)
 
 
-async def setup(bot):
-    await bot.add_cog(Leet(bot))
+def setup(bot):
+    bot.add_cog(Leet(bot))

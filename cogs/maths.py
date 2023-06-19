@@ -1,6 +1,7 @@
 import math
 import sympy
-from discord.ext import commands
+from nextcord.ext import commands
+
 
 
 class maths(commands.Cog):
@@ -147,5 +148,5 @@ class maths(commands.Cog):
         await ctx.send(f"The prime factorization of {num} is: {factors}")
 
 
-async def setup(bot):
-    await bot.add_cog(maths(bot))
+def setup(bot):
+    bot.add_cog(maths(bot))

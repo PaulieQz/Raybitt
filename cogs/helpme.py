@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import nextcord as discord
+from nextcord.ext import commands
 
 
 class Helpme(commands.Cog):
@@ -34,5 +34,5 @@ class Helpme(commands.Cog):
         await ctx.send(embed=embed)
 
 
-async def setup(bot):
-    await bot.add_cog(Helpme(bot))
+def setup(bot):
+    bot.add_cog(Helpme(bot))

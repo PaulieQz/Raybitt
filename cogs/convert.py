@@ -1,4 +1,4 @@
-from discord.ext import commands
+from nextcord.ext import commands
 
 
 class converter(commands.Cog):
@@ -25,5 +25,5 @@ class converter(commands.Cog):
             await ctx.send("Invalid conversion!")
 
 
-async def setup(bot):
-    await bot.add_cog(converter(bot))
+def setup(bot):
+    bot.add_cog(converter(bot))

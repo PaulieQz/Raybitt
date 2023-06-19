@@ -3,13 +3,15 @@ import nltk
 import configparser
 import re
 import cursor
-from discord.ext import commands
+import asyncio
+from nextcord.ext import commands
 from nltk.corpus import stopwords
 
 
 class Listener(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.muted = 0
         config = configparser.ConfigParser()
         config.read('config.ini')
         database_file = config['Database']['File']
@@ -21,15 +23,25 @@ class Listener(commands.Cog):
                         ')', '-', ':', ';', ',', '?', '`', '~', '|', '{', '}', '€', '£', '¥', '₩', '°', '•', '○', '●',
                         '□', '■', '♤', '♡', '◇', '♧', '☆', '▪︎', '¤', '《', '¿']
 
-
     @staticmethod
     def remove_symbols(text):
         # Remove all non-alphanumeric characters (excluding spaces) from the string
         return re.sub(r'[^a-zA-Z0-9\s]', '', text)
 
+    @staticmethod
+    async def bump(self, ctx):
+        channel = self.bot.get_channel(795724806225920001)
+        if self.muted != 1:
+            await channel.send("Sent dat shit!!!")
+            self.muted = 1
+            await asyncio.sleep(7200)
+            await channel.send("Time for another hit!")
+            self.muted = 0
+
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.bot:
+        if str(message.author) == "DISBOARD#2760":
+            await self.bump(self, message)
             return
         if message.content.startswith(self.bot.command_prefix):
             await self.bot.proccess_commands(message)
@@ -63,5 +75,5 @@ class Listener(commands.Cog):
                     print(f"Failed to commit changes for Word: {word}. Error: {error}")
 
 
-async def setup(bot):
-    await bot.add_cog(Listener(bot))
+def setup(bot):
+    bot.add_cog(Listener(bot))

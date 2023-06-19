@@ -1,8 +1,8 @@
 import sqlite3
 import configparser
-import discord
+import nextcord as discord
 import cursor
-from discord.ext import commands
+from nextcord.ext import commands
 
 
 class Top5(commands.Cog):
@@ -69,5 +69,5 @@ class Top5(commands.Cog):
             await ctx.send("No word counts found.")
 
 
-async def setup(bot):
-    await bot.add_cog(Top5(bot))
+def setup(bot):
+    bot.add_cog(Top5(bot))
