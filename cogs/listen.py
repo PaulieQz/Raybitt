@@ -51,8 +51,6 @@ class Listener(commands.Cog):
             if word not in self.dumbasswords:
                 word = self.remove_symbols(word)
                 word = word.lower()
-                if word.startswith(('http://', 'https://')):
-                    continue
                 if len(word) > 2 and word.isalpha():
                     try:
                         self.cursor.execute('SELECT count FROM word_counts WHERE word = ?', [word])
