@@ -45,7 +45,7 @@ class DumbassDetector(commands.Cog):
                 return
             if await self.is_hacking_question(message.content):
                 response = ("Explore hacking the right way. Start here: "
-                           "https://wiki.subhackers.org/en/getting-started/Offensive-Security-Reading-List")
+                           "https://wiki.subhackers.org/getting-started/getting-started-in-cybersecurity")
                 await message.channel.send(response)
                 # Set a cooldown for this user
                 self.user_cooldowns[message.author.id] = datetime.now() + timedelta(hours=1)
