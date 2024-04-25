@@ -13,10 +13,10 @@ class Bump(commands.Cog):
         print("Starting bumper")
         channel = self.bot.get_channel(795724806225920001)
         print(ctx.message.author)
-        await channel.send("Sent dat shit!!!")
+        await channel.send("Disboard bump available")
         print("starting timer")
         await asyncio.sleep(7200)
-        await ctx.send("Time for another hit!")
+        await ctx.send("ACK Disboard API Request")
 
 
 def setup(bot):
